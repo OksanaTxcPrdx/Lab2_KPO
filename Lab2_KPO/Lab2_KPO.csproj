@@ -8,6 +8,9 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="MathParser.org-mXparser" Version="6.1.0" />
+  </ItemGroup>
 
   <ItemGroup>
     <Content Include="..\README.md">
