@@ -90,18 +90,12 @@
 
         <Style x:Key="RoundedTextBoxStyle" TargetType="TextBox">
             <Setter Property="Background" Value="#CADABA" />
-            <!-- Светло-серый фон -->
             <Setter Property="Foreground" Value="#FF212121" />
-            <!-- Темно-серый текст -->
             <Setter Property="BorderBrush" Value="#FFBDBDBD" />
-            <!-- Серая граница -->
             <Setter Property="FontSize" Value="20" />
             <Setter Property="FontFamily" Value="Consolas" />
-            <!-- Моноширинный шрифт -->
             <Setter Property="Padding" Value="10,5,10,5" />
-            <!-- Отступы -->
             <Setter Property="TextAlignment" Value="Right" />
-            <!-- Выравнивание текста по правому краю -->
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="TextBox">
@@ -109,7 +103,6 @@
                                 CornerRadius="10" >
 
                             <ScrollViewer x:Name="PART_ContentHost" />
-                            <!-- Обязательный элемент для TextBox -->
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
@@ -119,8 +112,8 @@
 
     </Window.Resources>
     <Grid>
-        <TextBox x:Name="tbInputExpression" Style="{StaticResource RoundedTextBoxStyle}" TextAlignment="Right" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="75,20,0,0" TextWrapping="NoWrap" Text="TextBox" VerticalAlignment="Top" Width="306" Height="43" FontSize="20"/>
-        <TextBox x:Name="tbResult" Style="{StaticResource RoundedTextBoxStyle}" TextAlignment="Right" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="273,70,0,0" TextWrapping="NoWrap" Text="TextBox" VerticalAlignment="Top" Width="108" Height="29" FontSize="20"/>
+        <TextBox x:Name="tbInputExpression" Style="{StaticResource RoundedTextBoxStyle}" TextAlignment="Right" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="75,20,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="306" Height="43" FontSize="20"/>
+        <TextBox x:Name="tbResult" Style="{StaticResource RoundedTextBoxStyle}" TextAlignment="Right" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="273,70,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="108" Height="29" FontSize="20"/>
 
         <Grid Margin="75,110,69,10">
 
@@ -159,12 +152,12 @@
             <Button x:Name="btn1" Style="{StaticResource SquareButtonStyle}" Margin="1" Grid.Row="3" Grid.Column="0" Content="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="24" FontFamily="Malgun Gothic Semilight" Click="BtnNumber_Click"/>
             <Button x:Name="btn2" Style="{StaticResource SquareButtonStyle}" Margin="1" Grid.Row="3" Grid.Column="1" Content="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="24" FontFamily="Malgun Gothic Semilight" Click="BtnNumber_Click"/>
             <Button x:Name="btn3" Style="{StaticResource SquareButtonStyle}" Margin="1" Grid.Row="3" Grid.Column="2" Content="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontFamily="Malgun Gothic Semilight" FontSize="24" Click="BtnNumber_Click"/>
-            <Button x:Name="btnOpen" Style="{StaticResource SquareButtonStyleOperations}" Margin="1" Grid.Row="3" Grid.Column="3" Content="("  FontSize="24" Click="BtnNumber_Click"/>
+            <Button x:Name="btnOpenBracket" Style="{StaticResource SquareButtonStyleOperations}" Margin="1" Grid.Row="3" Grid.Column="3" Content="("  FontSize="24" Click="btnOpenBracket_Click"/>
 
-            <Button x:Name="btnExponential" Style="{StaticResource SquareButtonStyleOperations}" Margin="4,0,2,2" Grid.Column="0" Content="xʸ"/>
+            <Button x:Name="btnExponential" Style="{StaticResource SquareButtonStyleOperations}" Margin="4,0,2,2" Grid.Column="0" Content="xʸ" Click="btnExponential_Click"/>
             <Button x:Name="btn0" Style="{StaticResource SquareButtonStyle}" Margin="1" Grid.Row="4" Grid.Column="1" Content="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontFamily="Malgun Gothic Semilight" FontSize="24" Click="BtnNumber_Click" />
-            <Button x:Name ="btnPoint" Style="{StaticResource SquareButtonStyle}" Margin="1" Grid.Row="4" Grid.Column="2" Content="," HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="24" FontFamily="Malgun Gothic Semilight" Click="Button_Click" />
-            <Button x:Name="btnClose" Style="{StaticResource SquareButtonStyleOperations}" Margin="1" Grid.Row="4" Grid.Column="3" Content=")" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontFamily="Malgun Gothic Semilight" FontSize="24" Click="BtnNumber_Click"/>
+            <Button x:Name ="btnPointBracket" Style="{StaticResource SquareButtonStyle}" Margin="1" Grid.Row="4" Grid.Column="2" Content="," HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="24" FontFamily="Malgun Gothic Semilight" Click="btnPointBracket_Click" />
+            <Button x:Name="btnCloseBracket" Style="{StaticResource SquareButtonStyleOperations}" Margin="1" Grid.Row="4" Grid.Column="3" Content=")" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontFamily="Malgun Gothic Semilight" FontSize="24" Click="btnCloseBracket_Click"/>
 
         </Grid>
 

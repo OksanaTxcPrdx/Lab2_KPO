@@ -7,7 +7,13 @@ public class Calculator : ICalculator
     public double Compute(string expression)
     {
         Expression expressionCalculator = new Expression(expression);
-        
-        return expressionCalculator.calculate();
+
+        if (expressionCalculator.checkSyntax())
+        {
+            return expressionCalculator.calculate();
+        }
+
+        throw new ArgumentException("Invalid expression " + expression);
+
     }
 }

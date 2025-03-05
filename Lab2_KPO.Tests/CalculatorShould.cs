@@ -87,11 +87,18 @@ public class CalculatorShould
     [InlineData("2 / 0", double.NaN)] 
     [InlineData("-2 / 0", double.NaN)] 
     [InlineData("sqrt(-1)", double.NaN)] 
-    [InlineData("invalid_expression", double.NaN)] 
-    public void ReturnNaN_WhenExpressionIsInvalid(string expression, double expectedResult)
+    public void ReturnNaN_WhenExpressionNotValidResult(string expression, double expectedResult)
     {
         var actual = _sut.Compute(expression);
         
         Assert.Equal(actual, expectedResult);
+    }
+
+    [Theory]
+    [InlineData("2 / ")]
+    [InlineData("invalid expression")]
+    public void ReturnException_WhenExpressionIsInvalid(string expression)
+    {
+        Assert.Throws<ArgumentException>(() => _sut.Compute(expression));
     }
 }
