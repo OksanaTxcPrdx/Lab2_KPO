@@ -8,7 +8,18 @@
         Title="Calculator" Height="500" Width="450">
     <Window.Resources>
         <Style x:Key="SquareButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#FFFAFA" />
+
+            <Setter Property="Foreground" Value="#474A51" />
+
+            <Setter Property="BorderBrush" Value="#808080" />
+
+            <Setter Property="FontSize" Value="24" />
+            <Setter Property="FontFamily" Value="Malgun Gothic Semilight" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="VerticalAlignment" Value="Stretch" />
             <Setter Property="Template">
+
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Border Background="{TemplateBinding Background}"
@@ -41,14 +52,77 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-            <!-- Убираем привязку ширины к высоте -->
             <Setter Property="HorizontalAlignment" Value="Stretch" />
             <Setter Property="VerticalAlignment" Value="Stretch" />
         </Style>
+
+        <Style x:Key="SquareButtonStyleOperations" TargetType="Button">
+            <Setter Property="Background" Value="#F0FFFF" />
+            
+            <Setter Property="Foreground" Value="#00008B" />
+            
+            <Setter Property="BorderBrush" Value="#6495ED" />
+            
+            <Setter Property="FontSize" Value="24" />
+            <Setter Property="FontFamily" Value="Malgun Gothic Semilight" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="VerticalAlignment" Value="Stretch" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                        CornerRadius="10"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Width">
+                <Setter.Value>
+                    <Binding Path="ActualHeight" RelativeSource="{RelativeSource Self}" />
+                </Setter.Value>
+            </Setter>
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="VerticalAlignment" Value="Stretch" />
+        </Style>
+
+        <Style x:Key="RoundedTextBoxStyle" TargetType="TextBox">
+            <Setter Property="Background" Value="#CADABA" />
+            <!-- Светло-серый фон -->
+            <Setter Property="Foreground" Value="#FF212121" />
+            <!-- Темно-серый текст -->
+            <Setter Property="BorderBrush" Value="#FFBDBDBD" />
+            <!-- Серая граница -->
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontFamily" Value="Consolas" />
+            <!-- Моноширинный шрифт -->
+            <Setter Property="Padding" Value="10,5,10,5" />
+            <!-- Отступы -->
+            <Setter Property="TextAlignment" Value="Right" />
+            <!-- Выравнивание текста по правому краю -->
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border Background="{TemplateBinding Background}"
+                                CornerRadius="10" >
+
+                            <ScrollViewer x:Name="PART_ContentHost" />
+                            <!-- Обязательный элемент для TextBox -->
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
     </Window.Resources>
     <Grid>
-        <TextBox x:Name="tbInputExpression" TextAlignment="Right" VerticalContentAlignment="Center" HorizontalAlignment="Center" Margin="0,30,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="370" Height="43" FontSize="20"/>
-        <Grid Margin="75,93,67,30">
+        <TextBox x:Name="tbInputExpression" Style="{StaticResource RoundedTextBoxStyle}" TextAlignment="Right" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="75,20,0,0" TextWrapping="NoWrap" Text="TextBox" VerticalAlignment="Top" Width="306" Height="43" FontSize="20"/>
+        <TextBox x:Name="tbResult" Style="{StaticResource RoundedTextBoxStyle}" TextAlignment="Right" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="273,70,0,0" TextWrapping="NoWrap" Text="TextBox" VerticalAlignment="Top" Width="108" Height="29" FontSize="20"/>
+
+        <Grid Margin="75,110,69,10">
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -67,29 +141,31 @@
             </Grid.RowDefinitions>
 
 
-            <Button x:Name="btnClear" Style="{StaticResource SquareButtonStyle}" Margin="1" Grid.Row="0" Grid.Column="0" Content="С" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontFamily="Malgun Gothic Semilight" FontSize="24" Click="BtnClear_Click" />
-            <Button x:Name="btnDivision" Style="{StaticResource SquareButtonStyle}" Margin="1" Grid.Row="0" Grid.Column="1" Content="÷" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontFamily="Malgun Gothic Semilight" FontSize="36" Click="BtnDivision_Click" />
-            <Button x:Name="btnMultiplication" Style="{StaticResource SquareButtonStyle}" Margin="1" Grid.Row="0" Grid.Column="2" Content="×" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="36" FontFamily="Malgun Gothic Semilight" Click="BtnMultiplication_Click" />
-            <Button x:Name="btnBackSpace" Style="{StaticResource SquareButtonStyle}"  Margin="1" Grid.Row="0" Grid.Column="3" Content="⌫" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="1,1,1,1" FontFamily="Malgun Gothic Semilight" FontSize="24" Click="BtnBackSpace_Click" />
+            <Button x:Name="btnClear" Style="{StaticResource SquareButtonStyle}" Margin="3,2,2,0" Grid.Row="4" Content="С" FontSize="24" Click="BtnClear_Click" />
+            <Button x:Name="btnDivision" Style="{StaticResource SquareButtonStyleOperations}" Margin="1" Grid.Row="0" Grid.Column="1" Content="÷"  FontSize="36" Click="BtnDivision_Click" />
+            <Button x:Name="btnMultiplication" Style="{StaticResource SquareButtonStyleOperations}" Margin="1" Grid.Row="0" Grid.Column="2" Content="×"  FontSize="36" Click="BtnMultiplication_Click" />
+            <Button x:Name="btnBackSpace" Style="{StaticResource SquareButtonStyleOperations}"  Margin="1" Grid.Row="0" Grid.Column="3" Content="⌫"  BorderThickness="1,1,1,1"  FontSize="24" Click="BtnBackSpace_Click" />
 
             <Button x:Name="btn7" Style="{StaticResource SquareButtonStyle}" Margin="1" Grid.Row="1" Grid.Column="0" Content="7" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontFamily="Malgun Gothic Semilight" FontSize="24" Click="BtnNumber_Click"/>
             <Button x:Name="btn8" Style="{StaticResource SquareButtonStyle}" Margin="1" Grid.Row="1" Grid.Column="1" Content="8" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontFamily="Malgun Gothic Semilight" FontSize="24" Click="BtnNumber_Click"/>
             <Button x:Name="btn9" Style="{StaticResource SquareButtonStyle}" Margin="1" Grid.Row="1" Grid.Column="2" Content="9" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontFamily="Malgun Gothic Semilight" FontSize="24" Click="BtnNumber_Click"/>
-            <Button x:Name="btnSubtraction" Style="{StaticResource SquareButtonStyle}" Margin="1" Grid.Row="1" Grid.Column="3" Content="-" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontFamily="Malgun Gothic Semilight" FontSize="36" Click="btnSubtraction_Click" />
+            <Button x:Name="btnSubtraction" Style="{StaticResource SquareButtonStyleOperations}" Margin="1" Grid.Row="1" Grid.Column="3" Content="-"  FontSize="36" Click="btnSubtraction_Click" />
 
             <Button x:Name="btn4" Style="{StaticResource SquareButtonStyle}" Margin="1" Grid.Row="2" Grid.Column="0" Content="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontFamily="Malgun Gothic Semilight" FontSize="24" Click="BtnNumber_Click"/>
             <Button x:Name="btn5" Style="{StaticResource SquareButtonStyle}" Margin="1" Grid.Row="2" Grid.Column="1" Content="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="24" FontFamily="Malgun Gothic Semilight" Click="BtnNumber_Click"/>
             <Button x:Name="btn6" Style="{StaticResource SquareButtonStyle}" Margin="1" Grid.Row="2" Grid.Column="2" Content="6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontFamily="Malgun Gothic Semilight" FontSize="24" Click="BtnNumber_Click"/>
-            <Button x:Name="btnSummation" Style="{StaticResource SquareButtonStyle}" Margin="1" Grid.Row="2" Grid.Column="3" Content="+" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="36" FontFamily="Malgun Gothic Semilight" Click="btnSummation_Click" />
+            <Button x:Name="btnSummation" Style="{StaticResource SquareButtonStyleOperations}" Margin="1" Grid.Row="2" Grid.Column="3" Content="+" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="36" FontFamily="Malgun Gothic Semilight" Click="btnSummation_Click" />
 
             <Button x:Name="btn1" Style="{StaticResource SquareButtonStyle}" Margin="1" Grid.Row="3" Grid.Column="0" Content="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="24" FontFamily="Malgun Gothic Semilight" Click="BtnNumber_Click"/>
             <Button x:Name="btn2" Style="{StaticResource SquareButtonStyle}" Margin="1" Grid.Row="3" Grid.Column="1" Content="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="24" FontFamily="Malgun Gothic Semilight" Click="BtnNumber_Click"/>
             <Button x:Name="btn3" Style="{StaticResource SquareButtonStyle}" Margin="1" Grid.Row="3" Grid.Column="2" Content="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontFamily="Malgun Gothic Semilight" FontSize="24" Click="BtnNumber_Click"/>
-            <Button x:Name="btnEqual" Style="{StaticResource RectangularButtonStyle}" Margin="0,1,0,1" Grid.Row="3" Grid.Column="3" Content="=" Grid.RowSpan="2" HorizontalAlignment="Center" FontSize="36" FontFamily="Malgun Gothic Semilight" Width="67" Click="btnEqual_Click" />
+            <Button x:Name="btnOpen" Style="{StaticResource SquareButtonStyleOperations}" Margin="1" Grid.Row="3" Grid.Column="3" Content="("  FontSize="24" Click="BtnNumber_Click"/>
 
-            <Button x:Name="btnPercent" Style="{StaticResource SquareButtonStyle}" Margin="1" Grid.Row="4" Grid.Column="0" Content="%" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="24" FontFamily="Malgun Gothic"/>
+            <Button x:Name="btnExponential" Style="{StaticResource SquareButtonStyleOperations}" Margin="4,0,2,2" Grid.Column="0" Content="xʸ"/>
             <Button x:Name="btn0" Style="{StaticResource SquareButtonStyle}" Margin="1" Grid.Row="4" Grid.Column="1" Content="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontFamily="Malgun Gothic Semilight" FontSize="24" Click="BtnNumber_Click" />
-            <Button Style="{StaticResource SquareButtonStyle}" Margin="1" Grid.Row="4" Grid.Column="2" Content="," HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="24" FontFamily="Malgun Gothic Semilight" Click="Button_Click" />
+            <Button x:Name ="btnPoint" Style="{StaticResource SquareButtonStyle}" Margin="1" Grid.Row="4" Grid.Column="2" Content="," HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="24" FontFamily="Malgun Gothic Semilight" Click="Button_Click" />
+            <Button x:Name="btnClose" Style="{StaticResource SquareButtonStyleOperations}" Margin="1" Grid.Row="4" Grid.Column="3" Content=")" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontFamily="Malgun Gothic Semilight" FontSize="24" Click="BtnNumber_Click"/>
+
         </Grid>
 
     </Grid>
