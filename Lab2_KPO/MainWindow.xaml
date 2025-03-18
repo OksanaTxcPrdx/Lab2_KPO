@@ -58,11 +58,11 @@
 
         <Style x:Key="SquareButtonStyleOperations" TargetType="Button">
             <Setter Property="Background" Value="#F0FFFF" />
-            
+
             <Setter Property="Foreground" Value="#00008B" />
-            
+
             <Setter Property="BorderBrush" Value="#6495ED" />
-            
+
             <Setter Property="FontSize" Value="24" />
             <Setter Property="FontFamily" Value="Malgun Gothic Semilight" />
             <Setter Property="HorizontalAlignment" Value="Stretch" />
@@ -112,7 +112,7 @@
 
     </Window.Resources>
     <Grid>
-        <TextBox x:Name="tbInputExpression" Style="{StaticResource RoundedTextBoxStyle}" TextAlignment="Right" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="75,20,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="306" Height="43" FontSize="20"/>
+        <TextBox x:Name="tbInputExpression" Style="{StaticResource RoundedTextBoxStyle}" TextAlignment="Right" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="89,10,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="292" Height="53" FontSize="20" HorizontalScrollBarVisibility="Auto" TextChanged="tbInputExpression_TextChanged"/>
         <TextBox x:Name="tbResult" Style="{StaticResource RoundedTextBoxStyle}" TextAlignment="Right" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="273,70,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="108" Height="29" FontSize="20"/>
 
         <Grid Margin="75,110,69,10">

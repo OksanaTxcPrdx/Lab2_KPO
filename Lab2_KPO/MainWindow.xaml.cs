@@ -21,7 +21,11 @@ public partial class MainWindow : Window
 
         InitializeComponent();
     }
-
+    private void tbInputExpression_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        
+        tbInputExpression.ScrollToHorizontalOffset(tbInputExpression.ExtentWidth);
+    }
     private void CalculateExpression()
     {
         try
