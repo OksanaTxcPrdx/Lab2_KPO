@@ -12,7 +12,7 @@ public class MathExpressionValidator : IMathExpressionValidator
 
     public MathExpressionValidator()
     {
-    }
+    }   
     
     public MathExpressionValidator(string expression)
     {

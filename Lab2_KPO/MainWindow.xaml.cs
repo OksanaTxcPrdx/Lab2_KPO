@@ -17,49 +17,65 @@ public partial class MainWindow : Window
         License.iConfirmNonCommercialUse("Used for educational purposes to implement a calculator application");
 
         InitializeComponent();
+        var buttonStyle = (Style)FindResource("SquareButtonStyle");
+        InitializeCalculatorUI(buttonStyle);
+    }
 
-        new CalculatorVisualizationBuilder()
-            .AddCalculatorOperator("xʸ", '^', BtnCalculator_Click)
-            .AddCalculatorOperator("÷",'/', BtnCalculator_Click)
-            .AddCalculatorOperator("×",'*', BtnCalculator_Click)
-            .AddCalculatorOperator("⌫",' ', BtnBackSpace_Click)
+    private void InitializeCalculatorUI(Style buttonStyle)
+    {
+        var buttons = new List<CalculatorButton>
+        {
+            new OperationButton('^', "xʸ", buttonStyle,BtnCalculator_Click),
+            new OperationButton('/', "÷", buttonStyle,BtnCalculator_Click),
+            new OperationButton('*', "×", buttonStyle,BtnCalculator_Click),
+            new SpecialButton(' ', "⌫", buttonStyle,BtnBackSpace_Click),
+
+            new NumberButton('7', buttonStyle,BtnCalculator_Click),
+            new NumberButton('8', buttonStyle,BtnCalculator_Click),
+            new NumberButton('9', buttonStyle,BtnCalculator_Click),
+            new OperationButton('-', "-", buttonStyle,BtnCalculator_Click),
             
-            .AddCalculatorOperator("7",'7', BtnCalculator_Click)
-            .AddCalculatorOperator("8",'8', BtnCalculator_Click)
-            .AddCalculatorOperator("9",'9', BtnCalculator_Click)
-            .AddCalculatorOperator("-",'-', BtnCalculator_Click)
+            new NumberButton('4', buttonStyle,BtnCalculator_Click),
+            new NumberButton('5', buttonStyle,BtnCalculator_Click),
+            new NumberButton('6', buttonStyle,BtnCalculator_Click),
+            new OperationButton('+', "+", buttonStyle,BtnCalculator_Click),
             
-            .AddCalculatorOperator("4",'4', BtnCalculator_Click)
-            .AddCalculatorOperator("5",'5', BtnCalculator_Click)
-            .AddCalculatorOperator("6",'6', BtnCalculator_Click)
-            .AddCalculatorOperator("+",'+', BtnCalculator_Click)
+            new NumberButton('1', buttonStyle,BtnCalculator_Click),
+            new NumberButton('2', buttonStyle,BtnCalculator_Click),
+            new NumberButton('3', buttonStyle,BtnCalculator_Click),
+            new OperationButton('(', "(", buttonStyle,BtnCalculator_Click),
             
-            .AddCalculatorOperator("1",'1', BtnCalculator_Click)
-            .AddCalculatorOperator("2",'2', BtnCalculator_Click)
-            .AddCalculatorOperator("3",'3', BtnCalculator_Click)
-            .AddCalculatorOperator("(",'(', BtnCalculator_Click)
-            
-            .AddCalculatorOperator("С",' ', BtnClear_Click)
-            .AddCalculatorOperator("0",'0', BtnCalculator_Click)
-            .AddCalculatorOperator(",",',', BtnCalculator_Click)
-            .AddCalculatorOperator(")",')', BtnCalculator_Click)
-            
-            .Build(GridCalculatorOperator, (Style)FindResource("SquareButtonStyle")!);
+            new SpecialButton(' ',"C",buttonStyle,BtnClear_Click),
+            new NumberButton('0', buttonStyle,BtnCalculator_Click),
+            new OperationButton('.',",", buttonStyle,BtnCalculator_Click),
+            new OperationButton(')', ")", buttonStyle,BtnCalculator_Click),
+        };
+        
+        int columns = 4;
+        for (int i = 0; i < buttons.Count; i++)
+        {
+            var button = buttons[i];
+
+            Grid.SetRow(button, i / columns);
+            Grid.SetColumn(button, i % columns);
+            GridCalculatorOperator.Children.Add(button);
+        }
     }
 
     private void BtnCalculator_Click(char usesOperator)
     {
-        if(!_expressionValidator.TryAddChar(usesOperator))
+        if (!_expressionValidator.TryAddChar(usesOperator))
             return;
-        
+
         CalculateExpression();
     }
+
     private void BtnBackSpace_Click(char s)
     {
-        if(_expressionValidator.RemoveLastChar())
+        if (_expressionValidator.RemoveLastChar())
             CalculateExpression();
     }
-    
+
     private void BtnClear_Click(char s)
     {
         _expressionValidator.Clear();
@@ -76,14 +92,14 @@ public partial class MainWindow : Window
         try
         {
             double result = Math.Round(_calculator.Compute(_expressionValidator.Expression), 5);
-    
+
             tbResult.Text = result.ToString();
         }
         catch
         {
             // ignored
         }
-    
+
         tbInputExpression.Text = _expressionValidator.Expression;
     }
 }
