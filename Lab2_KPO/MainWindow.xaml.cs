@@ -17,6 +17,53 @@ public partial class MainWindow : Window
         License.iConfirmNonCommercialUse("Used for educational purposes to implement a calculator application");
 
         InitializeComponent();
+
+        new CalculatorVisualizationBuilder()
+            .AddCalculatorOperator("xʸ", '^', BtnCalculator_Click)
+            .AddCalculatorOperator("÷",'/', BtnCalculator_Click)
+            .AddCalculatorOperator("×",'*', BtnCalculator_Click)
+            .AddCalculatorOperator("⌫",' ', BtnBackSpace_Click)
+            
+            .AddCalculatorOperator("7",'7', BtnCalculator_Click)
+            .AddCalculatorOperator("8",'8', BtnCalculator_Click)
+            .AddCalculatorOperator("9",'9', BtnCalculator_Click)
+            .AddCalculatorOperator("-",'-', BtnCalculator_Click)
+            
+            .AddCalculatorOperator("4",'4', BtnCalculator_Click)
+            .AddCalculatorOperator("5",'5', BtnCalculator_Click)
+            .AddCalculatorOperator("6",'6', BtnCalculator_Click)
+            .AddCalculatorOperator("+",'+', BtnCalculator_Click)
+            
+            .AddCalculatorOperator("1",'1', BtnCalculator_Click)
+            .AddCalculatorOperator("2",'2', BtnCalculator_Click)
+            .AddCalculatorOperator("3",'3', BtnCalculator_Click)
+            .AddCalculatorOperator("(",'(', BtnCalculator_Click)
+            
+            .AddCalculatorOperator("С",' ', BtnClear_Click)
+            .AddCalculatorOperator("0",'0', BtnCalculator_Click)
+            .AddCalculatorOperator(",",',', BtnCalculator_Click)
+            .AddCalculatorOperator(")",')', BtnCalculator_Click)
+            
+            .Build(GridCalculatorOperator, (Style)FindResource("SquareButtonStyle")!);
+    }
+
+    private void BtnCalculator_Click(char usesOperator)
+    {
+        if(!_expressionValidator.TryAddChar(usesOperator))
+            return;
+        
+        CalculateExpression();
+    }
+    private void BtnBackSpace_Click(char s)
+    {
+        if(_expressionValidator.RemoveLastChar())
+            CalculateExpression();
+    }
+    
+    private void BtnClear_Click(char s)
+    {
+        _expressionValidator.Clear();
+        tbInputExpression.Text = "0";
     }
 
     private void tbInputExpression_TextChanged(object sender, TextChangedEventArgs e)
@@ -29,101 +76,14 @@ public partial class MainWindow : Window
         try
         {
             double result = Math.Round(_calculator.Compute(_expressionValidator.Expression), 5);
-
+    
             tbResult.Text = result.ToString();
         }
         catch
         {
             // ignored
         }
-
+    
         tbInputExpression.Text = _expressionValidator.Expression;
-    }
-
-    private void BtnClear_Click(object sender, RoutedEventArgs e)
-    {
-        _expressionValidator.Clear();
-        tbInputExpression.Text = "0";
-    }
-
-    private void BtnDivision_Click(object sender, RoutedEventArgs e)
-    {
-        if(!_expressionValidator.TryAddChar('/'))
-            return;
-        
-        CalculateExpression();
-    }
-
-    private void BtnMultiplication_Click(object sender, RoutedEventArgs e)
-    {
-        if(!_expressionValidator.TryAddChar('*'))
-            return;
-        
-        CalculateExpression();
-    }
-
-    private void BtnBackSpace_Click(object sender, RoutedEventArgs e)
-    {
-        if(_expressionValidator.RemoveLastChar())
-            CalculateExpression();
-    }
-
-    private void BtnNumber_Click(object sender, RoutedEventArgs e)
-    {
-        if (sender is not Button { Content: string number }) return;
-
-        if(!_expressionValidator.TryAddChar(number[^1]))
-            return;
-        
-        CalculateExpression();
-    }
-
-    private void btnSubtraction_Click(object sender, RoutedEventArgs e)
-    {
-        if(!_expressionValidator.TryAddChar('-'))
-            return;
-        
-        CalculateExpression();
-    }
-
-    private void btnSummation_Click(object sender, RoutedEventArgs e)
-    {
-        if(!_expressionValidator.TryAddChar('+'))
-            return;
-        
-        CalculateExpression();
-    }
-
-
-    private void btnPointBracket_Click(object sender, RoutedEventArgs e)
-    {
-        if(!_expressionValidator.TryAddChar('.'))
-            return;
-        
-        CalculateExpression();
-    }
-
-    private void btnOpenBracket_Click(object sender, RoutedEventArgs e)
-    {
-        if(!_expressionValidator.TryAddChar('('))
-            return;
-        
-        CalculateExpression();
-    }
-
-    private void btnCloseBracket_Click(object sender, RoutedEventArgs e)
-    {
-        if(!_expressionValidator.TryAddChar(')'))
-            return;
-        
-        CalculateExpression();
-    }
-
-    private void btnExponential_Click(object sender, RoutedEventArgs e)
-    {
-        if(!_expressionValidator.TryAddChar('^'))
-            return;
-        
-        CalculateExpression();
     }
 }
