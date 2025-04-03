@@ -25,30 +25,30 @@ public partial class MainWindow : Window
     {
         var buttons = new List<CalculatorButton>
         {
-            new OperationButton('^', "xʸ", buttonStyle,BtnCalculator_Click),
-            new OperationButton('/', "÷", buttonStyle,BtnCalculator_Click),
-            new OperationButton('*', "×", buttonStyle,BtnCalculator_Click),
-            new SpecialButton(' ', "⌫", buttonStyle,BtnBackSpace_Click),
+            CalculatorButtonFactory.CreateButton('^', "xʸ", buttonStyle,BtnCalculator_Click),
+            CalculatorButtonFactory.CreateButton('/', "÷", buttonStyle,BtnCalculator_Click),
+            CalculatorButtonFactory.CreateButton('*', "×", buttonStyle,BtnCalculator_Click),
+            CalculatorButtonFactory.CreateButton(' ', "⌫", buttonStyle,BtnBackSpace_Click),
 
-            new NumberButton('7', buttonStyle,BtnCalculator_Click),
-            new NumberButton('8', buttonStyle,BtnCalculator_Click),
-            new NumberButton('9', buttonStyle,BtnCalculator_Click),
-            new OperationButton('-', "-", buttonStyle,BtnCalculator_Click),
+            CalculatorButtonFactory.CreateButton('7', "7",buttonStyle,BtnCalculator_Click),
+            CalculatorButtonFactory.CreateButton('8',"8", buttonStyle,BtnCalculator_Click),
+            CalculatorButtonFactory.CreateButton('9',"9", buttonStyle,BtnCalculator_Click),
+            CalculatorButtonFactory.CreateButton('-', "-", buttonStyle,BtnCalculator_Click),
             
-            new NumberButton('4', buttonStyle,BtnCalculator_Click),
-            new NumberButton('5', buttonStyle,BtnCalculator_Click),
-            new NumberButton('6', buttonStyle,BtnCalculator_Click),
-            new OperationButton('+', "+", buttonStyle,BtnCalculator_Click),
+            CalculatorButtonFactory.CreateButton('4',"4", buttonStyle,BtnCalculator_Click),
+            CalculatorButtonFactory.CreateButton('5', "5",buttonStyle,BtnCalculator_Click),
+            CalculatorButtonFactory.CreateButton('6', "6",buttonStyle,BtnCalculator_Click),
+            CalculatorButtonFactory.CreateButton('+', "+", buttonStyle,BtnCalculator_Click),
             
-            new NumberButton('1', buttonStyle,BtnCalculator_Click),
-            new NumberButton('2', buttonStyle,BtnCalculator_Click),
-            new NumberButton('3', buttonStyle,BtnCalculator_Click),
-            new OperationButton('(', "(", buttonStyle,BtnCalculator_Click),
+            CalculatorButtonFactory.CreateButton('1',"1" ,buttonStyle,BtnCalculator_Click),
+            CalculatorButtonFactory.CreateButton('2',"2", buttonStyle,BtnCalculator_Click),
+            CalculatorButtonFactory.CreateButton('3', "3",buttonStyle,BtnCalculator_Click),
+            CalculatorButtonFactory.CreateButton('(', "(", buttonStyle,BtnCalculator_Click),
             
-            new SpecialButton(' ',"C",buttonStyle,BtnClear_Click),
-            new NumberButton('0', buttonStyle,BtnCalculator_Click),
-            new OperationButton('.',",", buttonStyle,BtnCalculator_Click),
-            new OperationButton(')', ")", buttonStyle,BtnCalculator_Click),
+            CalculatorButtonFactory.CreateButton(' ',"C",buttonStyle,BtnClear_Click),
+            CalculatorButtonFactory.CreateButton('0',"0", buttonStyle,BtnCalculator_Click),
+            CalculatorButtonFactory.CreateButton('.',",", buttonStyle,BtnCalculator_Click),
+            CalculatorButtonFactory.CreateButton(')', ")", buttonStyle,BtnCalculator_Click),
         };
         
         int columns = 4;
