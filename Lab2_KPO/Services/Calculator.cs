@@ -1,6 +1,6 @@
 using org.mariuszgromada.math.mxparser;
 
-namespace Lab2_KPO;
+namespace Lab2_KPO.Services;
 
 public class Calculator : ICalculator
 {

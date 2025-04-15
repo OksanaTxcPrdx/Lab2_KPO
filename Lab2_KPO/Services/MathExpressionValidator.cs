@@ -1,6 +1,6 @@
 using System.Text;
 
-namespace Lab2_KPO;
+namespace Lab2_KPO.Services;
 
 public class MathExpressionValidator : IMathExpressionValidator
 {

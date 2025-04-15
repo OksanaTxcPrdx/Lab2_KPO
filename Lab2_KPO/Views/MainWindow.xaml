@@ -1,11 +1,15 @@
-﻿<Window x:Class="Lab2_KPO.MainWindow"
+﻿<Window x:Class="Lab2_KPO.Views.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Lab2_KPO"
+        xmlns:viewModels="clr-namespace:Lab2_KPO.ViewModels"
         mc:Ignorable="d"
         Title="Calculator" Height="500" Width="450">
+    <Window.DataContext>
+        <viewModels:CalculatorViewModel />
+    </Window.DataContext>
     <Window.Resources>
         <Style x:Key="SquareButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="#FFFAFA" />
@@ -112,8 +116,10 @@
 
     </Window.Resources>
     <Grid>
-        <TextBox x:Name="tbInputExpression" Style="{StaticResource RoundedTextBoxStyle}" TextAlignment="Right" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="89,10,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="292" Height="53" FontSize="20" HorizontalScrollBarVisibility="Auto" TextChanged="tbInputExpression_TextChanged"/>
-        <TextBox x:Name="tbResult" Style="{StaticResource RoundedTextBoxStyle}" TextAlignment="Right" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="273,70,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="108" Height="29" FontSize="20"/>
+        <TextBox x:Name="tbInputExpression" Style="{StaticResource RoundedTextBoxStyle}"
+                 VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="89,10,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="292" Height="53"
+                 HorizontalScrollBarVisibility="Auto" TextChanged="tbInputExpression_TextChanged"/>
+        <TextBox x:Name="tbResult" Style="{StaticResource RoundedTextBoxStyle}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="273,70,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="108" Height="29" />
 
         <Grid Margin="75,110,69,10">
 
@@ -134,30 +140,46 @@
             </Grid.RowDefinitions>
 
 
-            <Button x:Name="btnClear" Style="{StaticResource SquareButtonStyle}" Margin="3,2,2,0" Grid.Row="4" Content="С" FontSize="24" Click="BtnClear_Click" />
-            <Button x:Name="btnDivision" Style="{StaticResource SquareButtonStyleOperations}" Margin="1" Grid.Row="0" Grid.Column="1" Content="÷"  FontSize="36" Click="BtnDivision_Click" />
-            <Button x:Name="btnMultiplication" Style="{StaticResource SquareButtonStyleOperations}" Margin="1" Grid.Row="0" Grid.Column="2" Content="×"  FontSize="36" Click="BtnMultiplication_Click" />
-            <Button x:Name="btnBackSpace" Style="{StaticResource SquareButtonStyleOperations}"  Margin="1" Grid.Row="0" Grid.Column="3" Content="⌫"  BorderThickness="1,1,1,1"  FontSize="24" Click="BtnBackSpace_Click" />
+            <Button x:Name="btnClear" Command="{Binding ClearCommand}" Style="{StaticResource SquareButtonStyle}" Margin="3,2,2,0" Grid.Row="4" Content="С"
+                    Click="BtnClear_Click" />
+            <Button x:Name="btnDivision" Command="{Binding AddCharCommand}" CommandParameter="/" Style="{StaticResource SquareButtonStyleOperations}" Margin="1" Grid.Row="0" Grid.Column="1" Content="÷"  FontSize="36" Click="BtnDivision_Click" />
+            <Button x:Name="btnMultiplication" Command="{Binding AddCharCommand}" CommandParameter="*" Style="{StaticResource SquareButtonStyleOperations}" Margin="1" Grid.Row="0" Grid.Column="2" Content="×"  FontSize="36" Click="BtnMultiplication_Click" />
+            <Button x:Name="btnBackSpace" Command="{Binding BackspaceCommand}" Style="{StaticResource SquareButtonStyleOperations}"  Margin="1" Grid.Row="0" Grid.Column="3" Content="⌫"  BorderThickness="1,1,1,1"
+                    Click="BtnBackSpace_Click" />
 
-            <Button x:Name="btn7" Style="{StaticResource SquareButtonStyle}" Margin="1" Grid.Row="1" Grid.Column="0" Content="7" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontFamily="Malgun Gothic Semilight" FontSize="24" Click="BtnNumber_Click"/>
-            <Button x:Name="btn8" Style="{StaticResource SquareButtonStyle}" Margin="1" Grid.Row="1" Grid.Column="1" Content="8" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontFamily="Malgun Gothic Semilight" FontSize="24" Click="BtnNumber_Click"/>
-            <Button x:Name="btn9" Style="{StaticResource SquareButtonStyle}" Margin="1" Grid.Row="1" Grid.Column="2" Content="9" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontFamily="Malgun Gothic Semilight" FontSize="24" Click="BtnNumber_Click"/>
-            <Button x:Name="btnSubtraction" Style="{StaticResource SquareButtonStyleOperations}" Margin="1" Grid.Row="1" Grid.Column="3" Content="-"  FontSize="36" Click="btnSubtraction_Click" />
+            <Button x:Name="btn7" Command="{Binding AddCharCommand}" CommandParameter="7" Style="{StaticResource SquareButtonStyle}" Margin="1" Grid.Row="1" Grid.Column="0" Content="7"
+                    Click="BtnNumber_Click"/>
+            <Button x:Name="btn8" Command="{Binding AddCharCommand}" CommandParameter="8" Style="{StaticResource SquareButtonStyle}" Margin="1" Grid.Row="1" Grid.Column="1" Content="8"
+                    Click="BtnNumber_Click"/>
+            <Button x:Name="btn9" Command="{Binding AddCharCommand}" CommandParameter="9" Style="{StaticResource SquareButtonStyle}" Margin="1" Grid.Row="1" Grid.Column="2" Content="9"
+                    Click="BtnNumber_Click"/>
+            <Button x:Name="btnSubtraction" Command="{Binding AddCharCommand}" CommandParameter="-" Style="{StaticResource SquareButtonStyleOperations}" Margin="1" Grid.Row="1" Grid.Column="3" Content="-"  FontSize="36" Click="btnSubtraction_Click" />
 
-            <Button x:Name="btn4" Style="{StaticResource SquareButtonStyle}" Margin="1" Grid.Row="2" Grid.Column="0" Content="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontFamily="Malgun Gothic Semilight" FontSize="24" Click="BtnNumber_Click"/>
-            <Button x:Name="btn5" Style="{StaticResource SquareButtonStyle}" Margin="1" Grid.Row="2" Grid.Column="1" Content="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="24" FontFamily="Malgun Gothic Semilight" Click="BtnNumber_Click"/>
-            <Button x:Name="btn6" Style="{StaticResource SquareButtonStyle}" Margin="1" Grid.Row="2" Grid.Column="2" Content="6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontFamily="Malgun Gothic Semilight" FontSize="24" Click="BtnNumber_Click"/>
-            <Button x:Name="btnSummation" Style="{StaticResource SquareButtonStyleOperations}" Margin="1" Grid.Row="2" Grid.Column="3" Content="+" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="36" FontFamily="Malgun Gothic Semilight" Click="btnSummation_Click" />
+            <Button x:Name="btn4" Command="{Binding AddCharCommand}" CommandParameter="4" Style="{StaticResource SquareButtonStyle}" Margin="1" Grid.Row="2" Grid.Column="0" Content="4"
+                    Click="BtnNumber_Click"/>
+            <Button x:Name="btn5" Command="{Binding AddCharCommand}" CommandParameter="5" Style="{StaticResource SquareButtonStyle}" Margin="1" Grid.Row="2" Grid.Column="1" Content="5"
+                    Click="BtnNumber_Click"/>
+            <Button x:Name="btn6" Command="{Binding AddCharCommand}" CommandParameter="6" Style="{StaticResource SquareButtonStyle}" Margin="1" Grid.Row="2" Grid.Column="2" Content="6"
+                    Click="BtnNumber_Click"/>
+            <Button x:Name="btnSummation" Command="{Binding AddCharCommand}" CommandParameter="+" Style="{StaticResource SquareButtonStyleOperations}" Margin="1" Grid.Row="2" Grid.Column="3" Content="+"
+                    FontSize="36" Click="btnSummation_Click" />
 
-            <Button x:Name="btn1" Style="{StaticResource SquareButtonStyle}" Margin="1" Grid.Row="3" Grid.Column="0" Content="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="24" FontFamily="Malgun Gothic Semilight" Click="BtnNumber_Click"/>
-            <Button x:Name="btn2" Style="{StaticResource SquareButtonStyle}" Margin="1" Grid.Row="3" Grid.Column="1" Content="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="24" FontFamily="Malgun Gothic Semilight" Click="BtnNumber_Click"/>
-            <Button x:Name="btn3" Style="{StaticResource SquareButtonStyle}" Margin="1" Grid.Row="3" Grid.Column="2" Content="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontFamily="Malgun Gothic Semilight" FontSize="24" Click="BtnNumber_Click"/>
-            <Button x:Name="btnOpenBracket" Style="{StaticResource SquareButtonStyleOperations}" Margin="1" Grid.Row="3" Grid.Column="3" Content="("  FontSize="24" Click="btnOpenBracket_Click"/>
+            <Button x:Name="btn1" Command="{Binding AddCharCommand}" CommandParameter="1" Style="{StaticResource SquareButtonStyle}" Margin="1" Grid.Row="3" Grid.Column="0" Content="1"
+                    Click="BtnNumber_Click"/>
+            <Button x:Name="btn2" Command="{Binding AddCharCommand}" CommandParameter="2" Style="{StaticResource SquareButtonStyle}" Margin="1" Grid.Row="3" Grid.Column="1" Content="2"
+                    Click="BtnNumber_Click"/>
+            <Button x:Name="btn3" Command="{Binding AddCharCommand}" CommandParameter="3" Style="{StaticResource SquareButtonStyle}" Margin="1" Grid.Row="3" Grid.Column="2" Content="3"
+                    Click="BtnNumber_Click"/>
+            <Button x:Name="btnOpenBracket" Command="{Binding AddCharCommand}" CommandParameter="(" Style="{StaticResource SquareButtonStyleOperations}" Margin="1" Grid.Row="3" Grid.Column="3" Content="("
+                    Click="btnOpenBracket_Click"/>
 
-            <Button x:Name="btnExponential" Style="{StaticResource SquareButtonStyleOperations}" Margin="4,0,2,2" Grid.Column="0" Content="xʸ" Click="btnExponential_Click"/>
-            <Button x:Name="btn0" Style="{StaticResource SquareButtonStyle}" Margin="1" Grid.Row="4" Grid.Column="1" Content="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontFamily="Malgun Gothic Semilight" FontSize="24" Click="BtnNumber_Click" />
-            <Button x:Name ="btnPointBracket" Style="{StaticResource SquareButtonStyle}" Margin="1" Grid.Row="4" Grid.Column="2" Content="," HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="24" FontFamily="Malgun Gothic Semilight" Click="btnPointBracket_Click" />
-            <Button x:Name="btnCloseBracket" Style="{StaticResource SquareButtonStyleOperations}" Margin="1" Grid.Row="4" Grid.Column="3" Content=")" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontFamily="Malgun Gothic Semilight" FontSize="24" Click="btnCloseBracket_Click"/>
+            <Button x:Name="btnExponential" Command="{Binding AddCharCommand}" CommandParameter="^" Style="{StaticResource SquareButtonStyleOperations}" Margin="4,0,2,2" Grid.Column="0" Content="xʸ" Click="btnExponential_Click"/>
+            <Button x:Name="btn0" Command="{Binding AddCharCommand}" CommandParameter="0" Style="{StaticResource SquareButtonStyle}" Margin="1" Grid.Row="4" Grid.Column="1" Content="0"
+                    Click="BtnNumber_Click" />
+            <Button x:Name ="btnPointBracket" Command="{Binding AddCharCommand}" CommandParameter="," Style="{StaticResource SquareButtonStyle}" Margin="1" Grid.Row="4" Grid.Column="2" Content=","
+                    Click="btnPointBracket_Click" />
+            <Button x:Name="btnCloseBracket" Command="{Binding AddCharCommand}" CommandParameter=")" Style="{StaticResource SquareButtonStyleOperations}" Margin="1" Grid.Row="4" Grid.Column="3" Content=")"
+                    Click="btnCloseBracket_Click"/>
 
         </Grid>
 
