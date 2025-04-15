@@ -1,4 +1,5 @@
 using Lab2_KPO;
+using Lab2_KPO.Services;
 
 namespace Lab2_KPO.Tests;
 

@@ -1,4 +1,4 @@
-namespace Lab2_KPO;
+namespace Lab2_KPO.Services;
 
 public interface IMathExpressionValidator
 {
