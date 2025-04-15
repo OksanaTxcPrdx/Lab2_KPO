@@ -12,7 +12,7 @@ public partial class CalculatorViewModel: ObservableObject
     private readonly MathExpressionValidator _validator = new();
 
     [ObservableProperty]
-    private string _expression = "0";
+    private string _expression = "";
 
     [ObservableProperty]
     private string _result = "";
@@ -25,11 +25,9 @@ public partial class CalculatorViewModel: ObservableObject
     [RelayCommand]
     private void AddChar(string symbol)
     {
-        if (!string.IsNullOrEmpty(symbol) && _validator.TryAddChar(symbol[0]))
-        {
-            Expression = _validator.Expression;
-            Calculate();
-        }
+        if (string.IsNullOrEmpty(symbol) || !_validator.TryAddChar(symbol[0])) return;
+        Expression = _validator.Expression;
+        Calculate();
     }
 
     [RelayCommand]
