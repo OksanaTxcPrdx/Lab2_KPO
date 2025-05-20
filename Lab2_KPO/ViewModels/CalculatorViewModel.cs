@@ -16,12 +16,17 @@ public partial class CalculatorViewModel: ObservableObject
 
     [ObservableProperty]
     private string _result = "";
+    
 
     public CalculatorViewModel()
     {
         License.iConfirmNonCommercialUse("Used for educational purposes to implement a calculator application");
+        
+        ICalculator baseCalculator = new Calculator();
+        _calculator = new LoggingCalculatorDecorator(baseCalculator);
+        
+        _validator = new MathExpressionValidator();
     }
-
     [RelayCommand]
     private void AddChar(string symbol)
     {
