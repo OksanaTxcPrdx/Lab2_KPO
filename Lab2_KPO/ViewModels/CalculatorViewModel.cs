@@ -22,6 +22,12 @@ public partial class CalculatorViewModel : ObservableObject
 
     [ObservableProperty]
     private string _result = "";
+    
+    [ObservableProperty]
+    private bool _isBoysMode = true;
+
+    [ObservableProperty]
+    private string _currentThemeName = "Мальчики";
 
     public CalculatorViewModel()
     {
@@ -73,6 +79,20 @@ public partial class CalculatorViewModel : ObservableObject
         _commandInvoker.Undo();
         Expression = _validator.Expression;
         Calculate();
+    }
+
+    [RelayCommand]
+    private void SwitchTheme()
+    {
+        IsBoysMode = !IsBoysMode;
+        CurrentThemeName = IsBoysMode ? "Мальчики" : "Девочки";
+    
+        // Звук переключения
+        var player = new System.Media.SoundPlayer();
+        player.Stream = Application.GetResourceStream(
+            new Uri("pack://application:,,,/Lab2_KPO;component/Resources/button-305770.wav")
+        )?.Stream;
+        player.Play();
     }
 
     private void Calculate()

@@ -4,6 +4,25 @@
              xmlns:local="clr-namespace:Lab2_KPO"
              StartupUri="/Views/MainWindow.xaml">
     <Application.Resources>
-         
+        <!-- Ресурсы для темы "Мальчики" (синяя) -->
+        <SolidColorBrush x:Key="BoysOperationButtonBackground" Color="#F0FFFF"/>
+        <SolidColorBrush x:Key="BoysOperationButtonForeground" Color="#00008B"/>
+        <SolidColorBrush x:Key="BoysOperationButtonBorder" Color="#6495ED"/>
+        
+        <SolidColorBrush x:Key="BoysButtonBackground" Color="#FFFAFA"/>
+        <SolidColorBrush x:Key="BoysButtonForeground" Color="#474A51"/>
+        <SolidColorBrush x:Key="BoysTextBoxBackground" Color="#CADABA"/>
+        
+        <!-- Ресурсы для темы "Девочки" (розовая) -->
+        <SolidColorBrush x:Key="GirlsOperationButtonBackground" Color="#FFF0F5"/>
+        <SolidColorBrush x:Key="GirlsOperationButtonForeground" Color="#C71585"/>
+        <SolidColorBrush x:Key="GirlsOperationButtonBorder" Color="#FF69B4"/>
+        
+        <SolidColorBrush x:Key="GirlsButtonBackground" Color="#FFE4E1"/>
+        <SolidColorBrush x:Key="GirlsButtonForeground" Color="#8B008B"/>
+        <SolidColorBrush x:Key="GirlsTextBoxBackground" Color="#FFDDF4"/>
+        
+        <SolidColorBrush x:Key="BoysWindowBackground" Color="#E6F0FF"/>
+        <SolidColorBrush x:Key="GirlsWindowBackground" Color="#FFEEF8"/>
     </Application.Resources>
 </Application>

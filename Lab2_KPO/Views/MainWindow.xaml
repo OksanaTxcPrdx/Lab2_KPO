@@ -5,27 +5,29 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Lab2_KPO"
         xmlns:viewModels="clr-namespace:Lab2_KPO.ViewModels"
+        xmlns:converters="clr-namespace:Lab2_KPO.Converters"
         mc:Ignorable="d"
-        Title="Calculator" Height="500" Width="450"
-        Icon="pack://application:,,,/Resources/icons8-calculator-100.ico">
-    
+        Title="Calculator" Height="550" Width="450"
+        Icon="pack://application:,,,/Resources/icons8-calculator-100.ico"
+        Cursor="pack://application:,,,/Resources/imba-cursor.cur">
+
+
     <Window.DataContext>
         <viewModels:CalculatorViewModel />
     </Window.DataContext>
     <Window.Resources>
+        <converters:BoolToThemeConverter x:Key="BoolToThemeConverter" />
+
+        <!-- Ресурсы для фона окна -->
+        <SolidColorBrush x:Key="BoysWindowBackground" Color="#E6F0FF"/>
+        <SolidColorBrush x:Key="GirlsWindowBackground" Color="#FFEEF8"/>
+
         <Style x:Key="SquareButtonStyle" TargetType="Button">
-            <Setter Property="Background" Value="#FFFAFA" />
-
-            <Setter Property="Foreground" Value="#474A51" />
-
-            <Setter Property="BorderBrush" Value="#808080" />
-
-            <Setter Property="FontSize" Value="24" />
-            <Setter Property="FontFamily" Value="Malgun Gothic Semilight" />
-            <Setter Property="HorizontalAlignment" Value="Stretch" />
-            <Setter Property="VerticalAlignment" Value="Stretch" />
+            <Setter Property="Background"
+                    Value="{Binding IsBoysMode, Converter={StaticResource BoolToThemeConverter}, ConverterParameter='BoysButtonBackground|GirlsButtonBackground'}" />
+            <Setter Property="Foreground"
+                    Value="{Binding IsBoysMode, Converter={StaticResource BoolToThemeConverter}, ConverterParameter='BoysButtonForeground|GirlsButtonForeground'}" />
             <Setter Property="Template">
-
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Border Background="{TemplateBinding Background}"
@@ -37,14 +39,11 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-            <Setter Property="Width">
-                <Setter.Value>
-                    <Binding Path="ActualHeight" RelativeSource="{RelativeSource Self}" />
-                </Setter.Value>
-            </Setter>
-            <Setter Property="HorizontalAlignment" Value="Stretch" />
-            <Setter Property="VerticalAlignment" Value="Stretch" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontFamily" Value="Malgun Gothic Semilight" />
+            <Setter Property="Margin" Value="3" />
         </Style>
+
         <Style x:Key="RectangularButtonStyle" TargetType="Button">
             <Setter Property="Template">
                 <Setter.Value>
@@ -58,21 +57,19 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontFamily" Value="Malgun Gothic Semilight" />
             <Setter Property="HorizontalAlignment" Value="Stretch" />
             <Setter Property="VerticalAlignment" Value="Stretch" />
         </Style>
 
         <Style x:Key="SquareButtonStyleOperations" TargetType="Button">
-            <Setter Property="Background" Value="#F0FFFF" />
-
-            <Setter Property="Foreground" Value="#00008B" />
-
-            <Setter Property="BorderBrush" Value="#6495ED" />
-
-            <Setter Property="FontSize" Value="24" />
-            <Setter Property="FontFamily" Value="Malgun Gothic Semilight" />
-            <Setter Property="HorizontalAlignment" Value="Stretch" />
-            <Setter Property="VerticalAlignment" Value="Stretch" />
+            <Setter Property="Background"
+                    Value="{Binding IsBoysMode, Converter={StaticResource BoolToThemeConverter}, ConverterParameter='BoysOperationButtonBackground|GirlsOperationButtonBackground'}" />
+            <Setter Property="Foreground"
+                    Value="{Binding IsBoysMode, Converter={StaticResource BoolToThemeConverter}, ConverterParameter='BoysOperationButtonForeground|GirlsOperationButtonForeground'}" />
+            <Setter Property="BorderBrush"
+                    Value="{Binding IsBoysMode, Converter={StaticResource BoolToThemeConverter}, ConverterParameter='BoysOperationButtonBorder|GirlsOperationButtonBorder'}" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
@@ -85,57 +82,59 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-            <Setter Property="Width">
-                <Setter.Value>
-                    <Binding Path="ActualHeight" RelativeSource="{RelativeSource Self}" />
-                </Setter.Value>
-            </Setter>
-            <Setter Property="HorizontalAlignment" Value="Stretch" />
-            <Setter Property="VerticalAlignment" Value="Stretch" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontFamily" Value="Malgun Gothic Semilight" />
+            <Setter Property="Margin" Value="3" />
         </Style>
 
         <Style x:Key="RoundedTextBoxStyle" TargetType="TextBox">
-            <Setter Property="Background" Value="#CADABA" />
-            <Setter Property="Foreground" Value="#FF212121" />
-            <Setter Property="BorderBrush" Value="#FFBDBDBD" />
-            <Setter Property="FontSize" Value="20" />
-            <Setter Property="FontFamily" Value="Consolas" />
-            <Setter Property="Padding" Value="10,5,10,5" />
-            <Setter Property="TextAlignment" Value="Right" />
+            <Setter Property="Background"
+                    Value="{Binding IsBoysMode, Converter={StaticResource BoolToThemeConverter}, ConverterParameter='BoysTextBoxBackground|GirlsTextBoxBackground'}" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="TextBox">
                         <Border Background="{TemplateBinding Background}"
-                                CornerRadius="10">
-
-                            <ScrollViewer x:Name="PART_ContentHost" />
+                                CornerRadius="10"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <ScrollViewer x:Name="PART_ContentHost" Margin="5,0" VerticalAlignment="Center"/>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
 
-
-
     </Window.Resources>
-    <Grid>
-        <TextBox x:Name="tbInputExpression"  Style="{StaticResource RoundedTextBoxStyle}"
-                 VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="89,10,0,0" TextWrapping="NoWrap"
-                 Text="{Binding Expression, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="292" Height="53"
+    <Grid Background="{Binding IsBoysMode, Converter={StaticResource BoolToThemeConverter}, ConverterParameter='BoysWindowBackground|GirlsWindowBackground'}">
+        <!-- Добавляем меню в верхней части -->
+        <DockPanel VerticalAlignment="Top">
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="{Binding CurrentThemeName}"
+                          Command="{Binding SwitchThemeCommand}"
+                          Background="{Binding IsBoysMode, Converter={StaticResource BoolToThemeConverter}, ConverterParameter='BoysOperationButtonBackground|GirlsOperationButtonBackground'}"
+                          Foreground="{Binding IsBoysMode, Converter={StaticResource BoolToThemeConverter}, ConverterParameter='BoysOperationButtonForeground|GirlsOperationButtonForeground'}"
+                          BorderBrush="{Binding IsBoysMode, Converter={StaticResource BoolToThemeConverter}, ConverterParameter='BoysOperationButtonBorder|GirlsOperationButtonBorder'}">
+                </MenuItem>
+            </Menu>
+        </DockPanel>
+    
+        <TextBox x:Name="tbInputExpression" Style="{StaticResource RoundedTextBoxStyle}"
+                 VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="89,40,0,0" TextWrapping="NoWrap"
+                 Text="{Binding Expression, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="292"
+                 Height="53"
                  HorizontalScrollBarVisibility="Auto" />
-        <TextBox x:Name="tbResult" Text="{Binding Result, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource RoundedTextBoxStyle}" VerticalContentAlignment="Center"
-                 HorizontalAlignment="Left" Margin="273,70,0,0" TextWrapping="NoWrap" VerticalAlignment="Top"
+        <TextBox x:Name="tbResult" Text="{Binding Result, UpdateSourceTrigger=PropertyChanged}"
+                 Style="{StaticResource RoundedTextBoxStyle}" VerticalContentAlignment="Center"
+                 HorizontalAlignment="Left" Margin="273,100,0,0" TextWrapping="NoWrap" VerticalAlignment="Top"
                  Width="108" Height="29" />
 
-        <Grid Margin="75,110,69,10">
-
+        <Grid Margin="75,140,69,60">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
@@ -145,61 +144,57 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-
             <Button x:Name="btnClear" Command="{Binding ClearCommand}" Style="{StaticResource SquareButtonStyle}"
-                    Margin="3,2,2,0" Grid.Row="4" Content="С" />
+                    Grid.Row="4" Grid.Column="0" Content="С" />
             <Button x:Name="btnDivision" Command="{Binding AddCharCommand}" CommandParameter="/"
-                    Style="{StaticResource SquareButtonStyleOperations}" Margin="1" Grid.Row="0" Grid.Column="1"
+                    Style="{StaticResource SquareButtonStyleOperations}" Grid.Row="0" Grid.Column="1"
                     Content="÷" FontSize="36" />
             <Button x:Name="btnMultiplication" Command="{Binding AddCharCommand}" CommandParameter="*"
-                    Style="{StaticResource SquareButtonStyleOperations}" Margin="1" Grid.Row="0" Grid.Column="2"
+                    Style="{StaticResource SquareButtonStyleOperations}" Grid.Row="0" Grid.Column="2"
                     Content="×" FontSize="36" />
             <Button x:Name="btnBackSpace" Command="{Binding BackspaceCommand}"
-                    Style="{StaticResource SquareButtonStyleOperations}" Margin="1" Grid.Row="0" Grid.Column="3"
+                    Style="{StaticResource SquareButtonStyleOperations}" Grid.Row="0" Grid.Column="3"
                     Content="⌫" BorderThickness="1,1,1,1" />
 
             <Button x:Name="btn7" Command="{Binding AddCharCommand}" CommandParameter="7"
-                    Style="{StaticResource SquareButtonStyle}" Margin="1" Grid.Row="1" Grid.Column="0" Content="7" />
+                    Style="{StaticResource SquareButtonStyle}" Grid.Row="1" Grid.Column="0" Content="7" />
             <Button x:Name="btn8" Command="{Binding AddCharCommand}" CommandParameter="8"
-                    Style="{StaticResource SquareButtonStyle}" Margin="1" Grid.Row="1" Grid.Column="1" Content="8" />
+                    Style="{StaticResource SquareButtonStyle}" Grid.Row="1" Grid.Column="1" Content="8" />
             <Button x:Name="btn9" Command="{Binding AddCharCommand}" CommandParameter="9"
-                    Style="{StaticResource SquareButtonStyle}" Margin="1" Grid.Row="1" Grid.Column="2" Content="9" />
+                    Style="{StaticResource SquareButtonStyle}" Grid.Row="1" Grid.Column="2" Content="9" />
             <Button x:Name="btnSubtraction" Command="{Binding AddCharCommand}" CommandParameter="-"
-                    Style="{StaticResource SquareButtonStyleOperations}" Margin="1" Grid.Row="1" Grid.Column="3"
+                    Style="{StaticResource SquareButtonStyleOperations}" Grid.Row="1" Grid.Column="3"
                     Content="-" FontSize="36" />
 
             <Button x:Name="btn4" Command="{Binding AddCharCommand}" CommandParameter="4"
-                    Style="{StaticResource SquareButtonStyle}" Margin="1" Grid.Row="2" Grid.Column="0" Content="4" />
+                    Style="{StaticResource SquareButtonStyle}" Grid.Row="2" Grid.Column="0" Content="4" />
             <Button x:Name="btn5" Command="{Binding AddCharCommand}" CommandParameter="5"
-                    Style="{StaticResource SquareButtonStyle}" Margin="1" Grid.Row="2" Grid.Column="1" Content="5" />
+                    Style="{StaticResource SquareButtonStyle}" Grid.Row="2" Grid.Column="1" Content="5" />
             <Button x:Name="btn6" Command="{Binding AddCharCommand}" CommandParameter="6"
-                    Style="{StaticResource SquareButtonStyle}" Margin="1" Grid.Row="2" Grid.Column="2" Content="6" />
+                    Style="{StaticResource SquareButtonStyle}" Grid.Row="2" Grid.Column="2" Content="6" />
             <Button x:Name="btnSummation" Command="{Binding AddCharCommand}" CommandParameter="+"
-                    Style="{StaticResource SquareButtonStyleOperations}" Margin="1" Grid.Row="2" Grid.Column="3"
-                    Content="+"
-                    FontSize="36" />
+                    Style="{StaticResource SquareButtonStyleOperations}" Grid.Row="2" Grid.Column="3"
+                    Content="+" FontSize="36" />
 
             <Button x:Name="btn1" Command="{Binding AddCharCommand}" CommandParameter="1"
-                    Style="{StaticResource SquareButtonStyle}" Margin="1" Grid.Row="3" Grid.Column="0" Content="1" />
+                    Style="{StaticResource SquareButtonStyle}" Grid.Row="3" Grid.Column="0" Content="1" />
             <Button x:Name="btn2" Command="{Binding AddCharCommand}" CommandParameter="2"
-                    Style="{StaticResource SquareButtonStyle}" Margin="1" Grid.Row="3" Grid.Column="1" Content="2" />
+                    Style="{StaticResource SquareButtonStyle}" Grid.Row="3" Grid.Column="1" Content="2" />
             <Button x:Name="btn3" Command="{Binding AddCharCommand}" CommandParameter="3"
-                    Style="{StaticResource SquareButtonStyle}" Margin="1" Grid.Row="3" Grid.Column="2" Content="3" />
+                    Style="{StaticResource SquareButtonStyle}" Grid.Row="3" Grid.Column="2" Content="3" />
             <Button x:Name="btnOpenBracket" Command="{Binding AddCharCommand}" CommandParameter="("
-                    Style="{StaticResource SquareButtonStyleOperations}" Margin="1" Grid.Row="3" Grid.Column="3"
+                    Style="{StaticResource SquareButtonStyleOperations}" Grid.Row="3" Grid.Column="3"
                     Content="(" />
 
             <Button x:Name="btnExponential" Command="{Binding AddCharCommand}" CommandParameter="^"
-                    Style="{StaticResource SquareButtonStyleOperations}" Margin="4,0,2,2" Grid.Column="0" Content="xʸ" />
+                    Style="{StaticResource SquareButtonStyleOperations}" Grid.Row="0" Grid.Column="0" Content="xʸ" />
             <Button x:Name="btn0" Command="{Binding AddCharCommand}" CommandParameter="0"
-                    Style="{StaticResource SquareButtonStyle}" Margin="1" Grid.Row="4" Grid.Column="1" Content="0" />
-            <Button x:Name="btnPointBracket" Command="{Binding AddCharCommand}" CommandParameter=","
-                    Style="{StaticResource SquareButtonStyle}" Margin="1" Grid.Row="4" Grid.Column="2" Content="," />
+                    Style="{StaticResource SquareButtonStyle}" Grid.Row="4" Grid.Column="1" Content="0" />
+            <Button x:Name="btnPointBracket" Command="{Binding AddCharCommand}" CommandParameter="."
+                    Style="{StaticResource SquareButtonStyle}" Grid.Row="4" Grid.Column="2" Content="." />
             <Button x:Name="btnCloseBracket" Command="{Binding AddCharCommand}" CommandParameter=")"
-                    Style="{StaticResource SquareButtonStyleOperations}" Margin="1" Grid.Row="4" Grid.Column="3"
+                    Style="{StaticResource SquareButtonStyleOperations}" Grid.Row="4" Grid.Column="3"
                     Content=")" />
-
         </Grid>
-
     </Grid>
 </Window>
