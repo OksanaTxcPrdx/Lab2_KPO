@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:Lab2_KPO"
         xmlns:viewModels="clr-namespace:Lab2_KPO.ViewModels"
         mc:Ignorable="d"
-        Title="Calculator" Height="500" Width="450">
+        Title="Calculator" Height="500" Width="450"
+        Icon="pack://application:,,,/Resources/icons8-calculator-100.ico">
+    
     <Window.DataContext>
         <viewModels:CalculatorViewModel />
     </Window.DataContext>
@@ -112,6 +114,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
 
 
     </Window.Resources>

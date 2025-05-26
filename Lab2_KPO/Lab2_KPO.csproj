@@ -27,4 +27,17 @@
     </Page>
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Resources\icons8-calculator-100.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\*"/>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Remove="Views\Resources\cursor.cur" />
+    <None Remove="Resources\button-click.mp3" />
+  </ItemGroup>
+
 </Project>

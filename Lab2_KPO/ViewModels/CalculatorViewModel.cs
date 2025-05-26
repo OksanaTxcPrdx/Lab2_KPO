@@ -4,6 +4,10 @@ using CommunityToolkit.Mvvm.Input;
 using Lab2_KPO.Commands;
 using Lab2_KPO.Services;
 using org.mariuszgromada.math.mxparser;
+using System.Media;
+using System.Windows;
+using System.Windows.Media;
+using System.Windows.Threading;
 
 namespace Lab2_KPO.ViewModels;
 
@@ -27,6 +31,13 @@ public partial class CalculatorViewModel : ObservableObject
     [RelayCommand]
     private void AddChar(string symbol)
     {
+        var player = new System.Media.SoundPlayer();
+        player.Stream = Application.GetResourceStream(
+            new Uri("pack://application:,,,/Lab2_KPO;component/Resources/button-305770.wav")
+        )?.Stream;
+        player.Play();
+        
+        
         if (string.IsNullOrEmpty(symbol)) return;
         
         var command = new AddCharCommand(_validator, symbol[0]);
