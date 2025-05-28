@@ -12,7 +12,6 @@ namespace Lab2_KPO.Views;
 /// </summary>
 public partial class MainWindow : Window
 {
-    private readonly MediaPlayer _clickSoundPlayer = new MediaPlayer();
     public MainWindow()
     {
         InitializeComponent();
