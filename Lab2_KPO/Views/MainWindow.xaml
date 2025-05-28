@@ -6,10 +6,13 @@
         xmlns:local="clr-namespace:Lab2_KPO"
         xmlns:viewModels="clr-namespace:Lab2_KPO.ViewModels"
         xmlns:converters="clr-namespace:Lab2_KPO.Converters"
+        xmlns:services="clr-namespace:Lab2_KPO.Services"
         mc:Ignorable="d"
-        Title="Calculator" Height="550" Width="450"
+        Title="Calculator" 
+       
         Icon="pack://application:,,,/Resources/icons8-calculator-100.ico"
         Cursor="pack://application:,,,/Resources/imba-cursor.cur">
+
 
 
     <Window.DataContext>
