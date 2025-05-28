@@ -1,6 +1,4 @@
-﻿using System.Configuration;
-using System.Data;
-using System.IO;
+﻿using System.IO;
 using System.Windows;
 using Lab2_KPO.Services;
 using Microsoft.Extensions.Configuration;

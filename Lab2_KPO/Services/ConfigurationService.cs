@@ -1,6 +1,4 @@
 ﻿using Microsoft.Extensions.Configuration;
-using System;
-using System.IO;
 
 namespace Lab2_KPO.Services;
 public static class ConfigurationService

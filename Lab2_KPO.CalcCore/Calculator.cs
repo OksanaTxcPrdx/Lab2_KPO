@@ -1,6 +1,6 @@
 using org.mariuszgromada.math.mxparser;
 
-namespace Lab2_KPO.Services;
+namespace Lab2_KPO.CalcCore;
 
 public class Calculator : ICalculator
 {
@@ -14,6 +14,5 @@ public class Calculator : ICalculator
         }
 
         throw new ArgumentException("Invalid expression " + expression);
-
     }
 }

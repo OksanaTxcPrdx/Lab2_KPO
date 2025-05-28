@@ -1,4 +1,4 @@
-﻿namespace Lab2_KPO.Commands;
+namespace Lab2_KPO.CalcCommands;
 
 public interface ICalculatorCommand
 {

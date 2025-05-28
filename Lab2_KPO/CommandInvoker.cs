@@ -1,4 +1,6 @@
-﻿namespace Lab2_KPO.Commands;
+﻿using Lab2_KPO.CalcCommands;
+
+namespace Lab2_KPO;
 
 public class CommandInvoker
 {

@@ -1,13 +1,11 @@
-
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Lab2_KPO.Commands;
+using Lab2_KPO.CalcCommands;
+using Lab2_KPO.CalcCore;
+using Lab2_KPO.CalcValidation;
 using Lab2_KPO.Services;
 using org.mariuszgromada.math.mxparser;
-using System.Media;
 using System.Windows;
-using System.Windows.Media;
-using System.Windows.Threading;
 
 namespace Lab2_KPO.ViewModels;
 

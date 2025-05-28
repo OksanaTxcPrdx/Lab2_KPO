@@ -1,6 +1,6 @@
 using System.Text;
 
-namespace Lab2_KPO.Services;
+namespace Lab2_KPO.CalcValidation;
 
 public class MathExpressionValidator : IMathExpressionValidator
 {
@@ -149,12 +149,19 @@ public class MathExpressionValidator : IMathExpressionValidator
     public void Clear()
     {
         _expression.Clear();
+        CountOpenBracket = 0;
     }
 
     public bool RemoveLastChar()
     {
         if (_expression.Length == 0)
             return false;
+
+        if (_expression[^1] == '(')
+            CountOpenBracket--;
+
+        if (_expression[^1] == ')')
+            CountOpenBracket++;
 
         _expression.Length--;
         

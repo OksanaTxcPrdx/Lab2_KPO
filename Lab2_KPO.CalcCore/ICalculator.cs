@@ -1,4 +1,4 @@
-namespace Lab2_KPO.Services;
+namespace Lab2_KPO.CalcCore;
 
 public interface ICalculator
 {

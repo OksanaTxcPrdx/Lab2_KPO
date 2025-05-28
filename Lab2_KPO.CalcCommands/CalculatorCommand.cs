@@ -1,6 +1,6 @@
-﻿using Lab2_KPO.Services;
+using Lab2_KPO.CalcValidation;
 
-namespace Lab2_KPO.Commands;
+namespace Lab2_KPO.CalcCommands;
 
 public abstract class CalculatorCommand : ICalculatorCommand
 {
