@@ -6,11 +6,13 @@
         xmlns:local="clr-namespace:Lab2_KPO"
         xmlns:viewModels="clr-namespace:Lab2_KPO.ViewModels"
         xmlns:converters="clr-namespace:Lab2_KPO.Converters"
+        xmlns:services="clr-namespace:Lab2_KPO.Services"
         mc:Ignorable="d"
-        Title="Calculator" Height="550" Width="450"
+        Title="Calculator"
+        MinHeight="500" MinWidth="400"
+        Height="500" Width="400"
         Icon="pack://application:,,,/Resources/icons8-calculator-100.ico"
         Cursor="pack://application:,,,/Resources/imba-cursor.cur">
-
 
     <Window.DataContext>
         <viewModels:CalculatorViewModel />
@@ -105,30 +107,40 @@
         </Style>
 
     </Window.Resources>
-    <Grid Background="{Binding IsBoysMode, Converter={StaticResource BoolToThemeConverter}, ConverterParameter='BoysWindowBackground|GirlsWindowBackground'}">
-        <!-- Добавляем меню в верхней части -->
-        <DockPanel VerticalAlignment="Top">
-            <Menu DockPanel.Dock="Top">
-                <MenuItem Header="{Binding CurrentThemeName}"
-                          Command="{Binding SwitchThemeCommand}"
-                          Background="{Binding IsBoysMode, Converter={StaticResource BoolToThemeConverter}, ConverterParameter='BoysOperationButtonBackground|GirlsOperationButtonBackground'}"
-                          Foreground="{Binding IsBoysMode, Converter={StaticResource BoolToThemeConverter}, ConverterParameter='BoysOperationButtonForeground|GirlsOperationButtonForeground'}"
-                          BorderBrush="{Binding IsBoysMode, Converter={StaticResource BoolToThemeConverter}, ConverterParameter='BoysOperationButtonBorder|GirlsOperationButtonBorder'}">
-                </MenuItem>
-            </Menu>
-        </DockPanel>
     
-        <TextBox x:Name="tbInputExpression" Style="{StaticResource RoundedTextBoxStyle}"
-                 VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="89,40,0,0" TextWrapping="NoWrap"
-                 Text="{Binding Expression, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="292"
-                 Height="53"
-                 HorizontalScrollBarVisibility="Auto" />
-        <TextBox x:Name="tbResult" Text="{Binding Result, UpdateSourceTrigger=PropertyChanged}"
-                 Style="{StaticResource RoundedTextBoxStyle}" VerticalContentAlignment="Center"
-                 HorizontalAlignment="Left" Margin="273,100,0,0" TextWrapping="NoWrap" VerticalAlignment="Top"
-                 Width="108" Height="29" />
+    <Grid Background="{Binding IsBoysMode, Converter={StaticResource BoolToThemeConverter}, ConverterParameter='BoysWindowBackground|GirlsWindowBackground'}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <!-- Меню в верхней части -->
+        <Menu Grid.Row="0">
+            <MenuItem Header="{Binding CurrentThemeName}"
+                      Command="{Binding SwitchThemeCommand}"
+                      Background="{Binding IsBoysMode, Converter={StaticResource BoolToThemeConverter}, ConverterParameter='BoysOperationButtonBackground|GirlsOperationButtonBackground'}"
+                      Foreground="{Binding IsBoysMode, Converter={StaticResource BoolToThemeConverter}, ConverterParameter='BoysOperationButtonForeground|GirlsOperationButtonForeground'}"
+                      BorderBrush="{Binding IsBoysMode, Converter={StaticResource BoolToThemeConverter}, ConverterParameter='BoysOperationButtonBorder|GirlsOperationButtonBorder'}">
+            </MenuItem>
+        </Menu>
 
-        <Grid Margin="75,140,69,60">
+        <!-- Поле ввода выражения -->
+        <TextBox Grid.Row="1" x:Name="tbInputExpression" Style="{StaticResource RoundedTextBoxStyle}"
+                 VerticalContentAlignment="Center" TextWrapping="NoWrap"
+                 Text="{Binding Expression, UpdateSourceTrigger=PropertyChanged}"
+                 Height="53" Margin="20,15,20,5"
+                 HorizontalScrollBarVisibility="Auto" />
+        
+        <!-- Поле результата -->
+        <TextBox Grid.Row="2" x:Name="tbResult" Text="{Binding Result, UpdateSourceTrigger=PropertyChanged}"
+                 Style="{StaticResource RoundedTextBoxStyle}" VerticalContentAlignment="Center"
+                 TextWrapping="NoWrap" Height="29" 
+                 HorizontalAlignment="Right" Width="108" Margin="0,0,20,10" />
+
+        <!-- Сетка с кнопками -->
+        <Grid Grid.Row="3" Margin="20,10,20,20">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />

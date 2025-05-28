@@ -15,7 +15,21 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
+        // Устанавливаем размеры окна из конфигурации
+        this.Height = ConfigurationService.WindowHeight;
+        this.Width = ConfigurationService.WindowWidth;
+            
+        // Если нужно установить минимальные размеры
+        this.MinHeight = 300;
+        this.MinWidth = 300;
     }
-   
-    
+
+    private void SetWindowSize()
+    {
+        // Получаем настройки из конфигурации
+        this.Height = ConfigurationService.WindowHeight;
+        this.Width = ConfigurationService.WindowWidth;
+
+       
+    }
 }

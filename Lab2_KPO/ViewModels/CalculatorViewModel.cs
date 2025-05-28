@@ -32,6 +32,10 @@ public partial class CalculatorViewModel : ObservableObject
     public CalculatorViewModel()
     {
         License.iConfirmNonCommercialUse("Used for educational purposes to implement a calculator application");
+    
+        // Используем настройки из конфигурационного файла
+        _isBoysMode = ConfigurationService.IsBoysMode;
+        _currentThemeName = _isBoysMode ? "Мальчики" : "Девочки";
     }
 
     [RelayCommand]
